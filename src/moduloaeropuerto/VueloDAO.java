@@ -107,7 +107,7 @@ public class VueloDAO {
         return aAerolineasTemp;//Retorno arraylist
     }
 
-    //Consultar Aerolineas según si tienen vuelo al día siguiente
+    /*/Consultar Aerolineas según si tienen vuelo al día siguiente
     
     public ArrayList<String> listaAerolineasCondicional(){ //Método que obtiene, guarda y devuelve un arraylist
         ArrayList<String> aAerolineasTemp = new ArrayList<>();//Creo ArrayList temporal
@@ -133,7 +133,7 @@ public class VueloDAO {
             System.out.println(e);
         }
         return aAerolineasTemp;//Retorno arraylist
-    }
+    }*/
     
     // Consultar Aviones por aerolinea
     

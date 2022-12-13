@@ -99,9 +99,9 @@ public class Controlador implements ActionListener{
         this.ventana2.btnTerminar.addActionListener(this);
         this.ventana2.btnSalir.addActionListener(this);
         
-        for(int i=0; i < vuelodao.listaAerolineasCondicional().size(); i++){
-            this.ventana2.cbAerolinea.addItem(vuelodao.listaAerolineasCondicional().get(i));
-        }
+        /*for(int i=0; i < .size(); i++){
+            this.ventana2.cbAerolinea.addItem(.get(i));
+        }*/
         
         for(int i=0; i < vuelodao.listaAviones(aerolinea).size(); i++){
             this.ventana2.cbAviones.addItem(vuelodao.listaAviones(aerolinea).get(i));
