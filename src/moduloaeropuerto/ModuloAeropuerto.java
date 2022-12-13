@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package moduloaeropuerto;
 
-/**
- *
- * @author lain-
- */
+import interfaz.Ventana1;
+
 public class ModuloAeropuerto {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Vuelo vuelo = new Vuelo();
+	Ventana1 interfaz = new Ventana1();
+        Controlador controlador = new Controlador(vuelo, interfaz);
+        interfaz.setVisible(true);
     }
-    
 }
