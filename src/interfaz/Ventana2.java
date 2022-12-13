@@ -42,7 +42,7 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         cbAerolinea = new javax.swing.JComboBox<>();
         lbAerolinea = new javax.swing.JLabel();
-        btnGuardar = new java.awt.Button();
+        btnTerminar = new java.awt.Button();
         btnSalir = new java.awt.Button();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbVuelos = new javax.swing.JTable();
@@ -79,10 +79,10 @@ public class Ventana2 extends javax.swing.JFrame {
         lbAerolinea.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbAerolinea.setText("Aerolinea");
 
-        btnGuardar.setActionCommand("Guardar");
-        btnGuardar.setFont(new java.awt.Font("Sitka Text", 0, 18)); // NOI18N
-        btnGuardar.setLabel("Guardar");
-        btnGuardar.setName(""); // NOI18N
+        btnTerminar.setActionCommand("Terminar");
+        btnTerminar.setFont(new java.awt.Font("Sitka Text", 0, 18)); // NOI18N
+        btnTerminar.setLabel("Terminar");
+        btnTerminar.setName(""); // NOI18N
 
         btnSalir.setActionCommand("Salir");
         btnSalir.setFont(new java.awt.Font("Sitka Text", 0, 18)); // NOI18N
@@ -92,9 +92,7 @@ public class Ventana2 extends javax.swing.JFrame {
         tbVuelos.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         tbVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, ""},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Pais", "Aeropuerto Origen", "Aeropuerto Destino", "Dia", "Hora", "No. Vuelo", "Avion"
@@ -125,7 +123,7 @@ public class Ventana2 extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(302, 302, 302))
@@ -153,7 +151,7 @@ public class Ventana2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTerminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -221,8 +219,8 @@ public class Ventana2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public java.awt.Button btnGuardar;
     public java.awt.Button btnSalir;
+    public java.awt.Button btnTerminar;
     public javax.swing.JComboBox<String> cbAerolinea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

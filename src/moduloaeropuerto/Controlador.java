@@ -96,7 +96,7 @@ public class Controlador implements ActionListener{
         this.ventana2 = vnt2;
         this.ventana2.cbAerolinea.addActionListener(this);
         this.ventana2.cbAviones.addActionListener(this);
-        this.ventana2.btnGuardar.addActionListener(this);
+        this.ventana2.btnTerminar.addActionListener(this);
         this.ventana2.btnSalir.addActionListener(this);
         
         for(int i=0; i < vuelodao.listaAerolineasCondicional().size(); i++){
@@ -217,7 +217,7 @@ public class Controlador implements ActionListener{
             this.ventana2.setVisible(true);
             this.ventana1.setVisible(false);
         }
-        if(e.getSource()== this.ventana2.btnGuardar){
+        if(e.getSource()== this.ventana2.btnTerminar){
             
         }
         if(e.getSource()== this.ventana2.btnSalir){
