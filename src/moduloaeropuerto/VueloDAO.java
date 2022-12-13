@@ -106,4 +106,55 @@ public class VueloDAO {
         }
         return aAerolineasTemp;//Retorno arraylist
     }
+
+    //Consultar Aerolineas según si tienen vuelo al día siguiente
+    
+    public ArrayList<String> listaAerolineasCondicional(){ //Método que obtiene, guarda y devuelve un arraylist
+        ArrayList<String> aAerolineasTemp = new ArrayList<>();//Creo ArrayList temporal
+        String consulta = "select codLinea"
+                        + "from LineaAerea LA, ProgramaVuelo PV, Vuelo V"
+                        + "where LA.codLinea = PV.codLinea,"
+                        + "and PV.codLinea = V.codLinea,"
+                        + "and V.fecha = ((current_date::date)+'1day'::interval)::date;";//Establezco consulta BD
+       
+        try {
+            con = ConexionBD.getConnection();//Obtengo la conexión
+            st = con.createStatement();//SE ASIGNA AL OBJETO STATEMENT LA CONEXION A BD
+            rs = st.executeQuery(consulta);//Ejecuto la consulta y la guardo en el objeto rs
+            while (rs.next()) {
+                String aerolinea = new String(); //Creo un nuevo string pais
+                aerolinea = rs.getString("nombreLinea"); //Seteo los datos de la iteración
+                aAerolineasTemp.add(aerolinea);//Añado a arraylist el objeto
+            }
+            st.close();// cierro la conexión
+            ConexionBD.dissconect(); //me desconecto de la base de datos
+        } catch (SQLException e) {//Si captura algún error lo muestra
+            System.out.println("Consulta imposible");
+            System.out.println(e);
+        }
+        return aAerolineasTemp;//Retorno arraylist
+    }
+    
+    // Consultar Aviones por aerolinea
+    
+    public ArrayList<String> listaAviones(String codLinea){ //Método que obtiene, guarda y devuelve un arraylist
+        ArrayList<String> aAvionesTemp = new ArrayList<>();//Creo ArrayList temporal
+        String consulta = "select * from Avion where codLinea = " + "'" + codLinea + "'";//Establezco consulta BD
+        try {
+            con = ConexionBD.getConnection();//Obtengo la conexión
+            st = con.createStatement();//SE ASIGNA AL OBJETO STATEMENT LA CONEXION A BD
+            rs = st.executeQuery(consulta);//Ejecuto la consulta y la guardo en el objeto rs
+            while (rs.next()) {
+                String avion = new String(); //Creo un nuevo string pais
+                avion = rs.getString("idModelo"); //Seteo los datos de la iteración
+                aAvionesTemp.add(avion);//Añado a arraylist el objeto
+            }
+            st.close();// cierro la conexión
+            ConexionBD.dissconect(); //me desconecto de la base de datos
+        } catch (SQLException e) {//Si captura algún error lo muestra
+            System.out.println("Consulta imposible");
+            System.out.println(e);
+        }
+        return aAvionesTemp;//Retorno arraylist
+    }
 }
