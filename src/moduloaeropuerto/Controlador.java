@@ -26,6 +26,7 @@ public class Controlador implements ActionListener{
         this.ventana1 = vnt1;
         this.ventana1.btnAgregar.addActionListener(this);
         this.ventana1.btnSiguiente.addActionListener(this);
+        this.ventana1.btnSiguiente.setEnabled(false);
                  
         for(int i=0; i < vuelodao.listaPaises().size(); i++){
             this.ventana1.cbPais.addItem(vuelodao.listaPaises().get(i));
@@ -56,8 +57,6 @@ public class Controlador implements ActionListener{
         for(int i=0; i < vuelodao.listaAviones(aerolinea).size(); i++){
             this.ventana2.cbAviones.addItem(vuelodao.listaAviones(aerolinea).get(i));
         }
-        
-        
     }
     
     public void listarAviones(){
@@ -75,55 +74,46 @@ public class Controlador implements ActionListener{
             vuelo.setHora((String) this.ventana1.cbHora.getSelectedItem() + ":" + (String) this.ventana1.cbMinuto.getSelectedItem());
             Date date = new Date();
             date = this.ventana1.dtFecha.getDate();
-            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-            vuelo.setFecha(df.format(date));
+            DateFormat df1 = new SimpleDateFormat("dd/mm/yyyy");
+            vuelo.setFecha(df1.format(date));
             
-            /*Date date = new Date();
-            date = this.ventana1.dtFecha.getDate();
-            DateFormat df = new SimpleDateFormat("EEEE MMMM dd yyyy", Locale.ENGLISH);
-            String fecha = df.format(date);
-            String[] dia = fecha.split(" ");
-            fecha = dia[0];
-            switch(fecha){
+            DateFormat df2 = new SimpleDateFormat("EEEE MMMM dd yyyy", Locale.ENGLISH);
+            String dia = df2.format(date);
+            String[] fecha = dia.split(" ");
+            dia = fecha[0];
+            switch(dia){
                 case "Monday":
-                    fecha = "1";
+                    dia = "1";
                     break;
                 case "Tuesday":
-                    fecha = "2";
+                    dia = "2";
                     break;
                 case "Wednesday":
-                    fecha = "3";
+                    dia = "3";
                     break;
                 case "Thursday":
-                    fecha = "4";
+                    dia = "4";
                     break;
                 case "Friday":
-                    fecha = "5";
+                    dia = "5";
                     break;
                 case "Saturday":
-                    fecha = "6";
+                    dia = "6";
                     break;
                 case "Sunday":
-                    fecha = "7";
+                    dia = "7";
                     break;    
-            }*/
+            }
+            
+            vuelo.setDia(dia);
+            this.ventana1.btnSiguiente.setEnabled(true);
+            
         }
         if(e.getSource() == this.ventana2.cbAerolinea){
             aerolinea = (String) this.ventana2.cbAerolinea.getSelectedItem();
         }
         
-        if(e.getSource()== this.ventana1.btnSiguiente){
-            /*vuelo = new Vuelo();
-            vuelo.setPais((String) this.ventana1.cbPais.getSelectedItem());
-            vuelo.setOrigen((String) this.ventana1.cbOrigen.getSelectedItem());
-            vuelo.setDestino((String) this.ventana1.cbDestino.getSelectedItem());
-            vuelo.setAerolinea((String) this.ventana1.cbDestino.getSelectedItem());
-            vuelo.setHora((String) this.ventana1.cbHora.getSelectedItem() + ":" + (String) this.ventana1.cbMinuto.getSelectedItem());
-            Date date = new Date();
-            date = this.ventana1.dtFecha.getDate();
-            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-            vuelo.setFecha(df.format(date));*/
-            
+        if(e.getSource()== this.ventana1.btnSiguiente){            
             this.ventana2.setVisible(true);
             this.ventana1.setVisible(false);
         }
@@ -138,5 +128,12 @@ public class Controlador implements ActionListener{
     }
 }
 /*
-    
+    ArrayList<String> prueba = new ArrayList();
+    prueba.add("a");
+    prueba.add("b");
+    prueba.add("c");
+        
+    for(int i=0; i < prueba.size(); i++){
+        this.ventana2.cbAviones.addItem(prueba.get(i));
+    }
 */

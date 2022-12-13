@@ -22,8 +22,7 @@ public class Ventana2 extends javax.swing.JFrame {
     
     public Ventana2() {
         initComponents();
-        String[] datos = {"sdfs","f15","4"};
-        cbAviones = new JComboBox(datos);
+        cbAviones = new JComboBox();
         TableColumn tc = tbVuelos.getColumnModel().getColumn(6);
         TableCellEditor tce = new DefaultCellEditor(cbAviones);
         tc.setCellEditor(tce);
