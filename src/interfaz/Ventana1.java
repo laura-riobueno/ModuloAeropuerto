@@ -18,8 +18,8 @@ public class Ventana1 extends javax.swing.JFrame {
         cbOrigen = new javax.swing.JComboBox<>();
         cbDestino = new javax.swing.JComboBox<>();
         cbAerolinea = new javax.swing.JComboBox<>();
-        cbHora = new javax.swing.JComboBox<>();
         cbMinuto = new javax.swing.JComboBox<>();
+        cbHora = new javax.swing.JComboBox<>();
         lbOrigen = new javax.swing.JLabel();
         lbDestino = new javax.swing.JLabel();
         lbAerolinea = new javax.swing.JLabel();
@@ -64,11 +64,10 @@ public class Ventana1 extends javax.swing.JFrame {
 
         cbAerolinea.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
 
-        cbHora.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        cbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
-
         cbMinuto.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        cbMinuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        cbHora.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        cbHora.setToolTipText("");
 
         lbOrigen.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         lbOrigen.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -136,8 +135,8 @@ public class Ventana1 extends javax.swing.JFrame {
                             .addComponent(cbAerolinea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(262, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,11 +165,11 @@ public class Ventana1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
