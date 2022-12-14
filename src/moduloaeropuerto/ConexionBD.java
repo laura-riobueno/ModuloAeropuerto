@@ -24,5 +24,6 @@ public class ConexionBD {
 
     public static void dissconect() {
         connection = null;
+        System.out.println("desconectado");
     }
 }

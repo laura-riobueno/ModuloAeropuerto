@@ -18,7 +18,7 @@ public class VueloDAO {
         rs = null;
     }
 
-    /*public void ingresarPersona(Vuelo objVuelo){ //Método que inserta en BD las personas que se le envíen en forma de objeto
+    /*public void ingresarVuelo(Vuelo objVuelo){ //Método que inserta en BD las personas que se le envíen en forma de objeto
         //AQUI ASIGNA A UN STRING EL QUERY DE INSERCIÓN CON LOS DATOS EXTRAIDOS DEL OBJETO RECIBIDO DE CONTROL
         String consulta = "insert into PERSONA(CEDULA,NOMBRE,APELLIDO,CORREO,TELEFONO) values ('"+ objVuelo.getCedula() + "','" + 
                 objPersona.getNombre() + "','" + objPersona.getApellido() + "','" + objVuelo.getCorreo() + "','" + objPersona.getTelefono() + "')";
@@ -65,7 +65,7 @@ public class VueloDAO {
     
     public ArrayList<String> listaAeropuertos(){ //Método que obtiene, guarda y devuelve un arraylist
         ArrayList<String> aAeropuertosTemp = new ArrayList<>();//Creo ArrayList temporal
-        String consulta = "select * from Lugar where idLugar = '5' or idLugar = '6'";//Establezco consulta BD
+        String consulta = "select * from lugar where idtipolu = '5' or idLugar = '6';";//Establezco consulta BD
         try {
             con = ConexionBD.getConnection();//Obtengo la conexión
             st = con.createStatement();//SE ASIGNA AL OBJETO STATEMENT LA CONEXION A BD
@@ -139,7 +139,22 @@ public class VueloDAO {
     
     public ArrayList<String> listaAviones(String codLinea){ //Método que obtiene, guarda y devuelve un arraylist
         ArrayList<String> aAvionesTemp = new ArrayList<>();//Creo ArrayList temporal
-        String consulta = "select * from Avion where codLinea = " + "'" + codLinea + "'";//Establezco consulta BD
+        switch(codLinea){
+            case "Avianca":
+                codLinea = "101";
+                break;
+            case "Latam":
+                codLinea = "102";
+                break;
+            case "Viva Air Colombia":
+                codLinea = "103";
+                break;
+            case "Wingo":
+                codLinea = "104";
+                break;
+        
+        }
+        String consulta = "select idmodelo from avion where codlinea = '" + codLinea + "'";//Establezco consulta BD
         try {
             con = ConexionBD.getConnection();//Obtengo la conexión
             st = con.createStatement();//SE ASIGNA AL OBJETO STATEMENT LA CONEXION A BD
