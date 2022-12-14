@@ -11,18 +11,24 @@ import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 public class Controlador implements ActionListener{
 
     private Vuelo vuelo;
-    private VueloDAO vueloDAO;
+    private VueloDAO vueloDAO = new VueloDAO();
     private Ventana1 ventana1;
     private Ventana2 ventana2;
     private String aerolinea;
+    private ArrayList<Vuelo> vuelos = new ArrayList();
     
-    public Controlador(Vuelo vuelo, Ventana1 vnt1, Ventana2 vnt2){
+    public Controlador(ArrayList<Vuelo> vuelos, Ventana1 vnt1, Ventana2 vnt2){
         
-        VueloDAO vuelodao = new VueloDAO();
+        
+        
         
         this.ventana1 = vnt1;
         this.ventana1.btnAgregar.addActionListener(this);
@@ -99,17 +105,15 @@ public class Controlador implements ActionListener{
         this.ventana2.btnTerminar.addActionListener(this);
         this.ventana2.btnSalir.addActionListener(this);
         
-        /*for(int i=0; i < .size(); i++){
-            this.ventana2.cbAerolinea.addItem(.get(i));
-        }*/
+        ArrayList<String> prueba2 = new ArrayList();
+        prueba2.add("b");
+        prueba2.add("mimi");
+        prueba2.add("mimimi");
         
-        for(int i=0; i < vuelodao.listaAviones(aerolinea).size(); i++){
-            this.ventana2.cbAviones.addItem(vuelodao.listaAviones(aerolinea).get(i));
+        this.ventana2.cbAerolinea.addItem(null);
+        for(int i=0; i < prueba2.size(); i++){
+            this.ventana2.cbAerolinea.addItem(prueba2.get(i));
         }
-    }
-    
-    public void listarAviones(){
-        
     }
     
     @Override
@@ -124,7 +128,7 @@ public class Controlador implements ActionListener{
                 vuelo.setOrigen((String) this.ventana1.cbOrigen.getSelectedItem());
                 vuelo.setDestino((String) this.ventana1.cbDestino.getSelectedItem());
                 vuelo.setAerolinea((String) this.ventana1.cbAerolinea.getSelectedItem());
-                vuelo.setHora((String) this.ventana1.cbMinuto.getSelectedItem() + ":" + (String) this.ventana1.cbHora.getSelectedItem());
+                vuelo.setHora((String) this.ventana1.cbHora.getSelectedItem() + ":" + (String) this.ventana1.cbMinuto.getSelectedItem());
                 Date date = new Date();
                 date = this.ventana1.dtFecha.getDate();
                 DateFormat df1 = new SimpleDateFormat("dd/mm/yyyy");
@@ -136,29 +140,32 @@ public class Controlador implements ActionListener{
                 dia = fecha[0];
                 switch(dia){
                     case "Monday":
-                        dia = "1";
+                        dia = "Luens";
                         break;
                     case "Tuesday":
-                        dia = "2";
+                        dia = "Martes";
                         break;
                     case "Wednesday":
-                        dia = "3";
+                        dia = "Miércoles";
                         break;
                     case "Thursday":
-                        dia = "4";
+                        dia = "Jueves";
                         break;
                     case "Friday":
-                        dia = "5";
+                        dia = "Viernes";
                         break;
                     case "Saturday":
-                        dia = "6";
+                        dia = "Sábado";
                         break;
                     case "Sunday":
-                        dia = "7";
+                        dia = "Domingo";
                         break;    
                 }
 
                 vuelo.setDia(dia);
+                
+                vuelos.add(vuelo);
+                
                 this.ventana1.btnSiguiente.setEnabled(true);
 
                 this.ventana1.cbPais.setSelectedIndex(0);
@@ -211,6 +218,34 @@ public class Controlador implements ActionListener{
         
         if(e.getSource() == this.ventana2.cbAerolinea){
             aerolinea = (String) this.ventana2.cbAerolinea.getSelectedItem();
+            
+            this.ventana2.cbAviones.addItem(null);
+            
+            ArrayList<String> prueba = new ArrayList();
+            prueba.add("a");
+            prueba.add("b");
+            prueba.add("c");
+            
+            for(int i=0; i < prueba.size(); i++){
+                this.ventana2.cbAviones.addItem(prueba.get(i));
+            }
+            
+            /*for(int i=0; i < vueloDAO.listaAviones(aerolinea).size(); i++){
+                this.ventana2.cbAviones.addItem(vueloDAO.listaAviones(aerolinea).get(i));
+            }*/
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(new Object[]{"Pais", "Aeropuerto de Origen", "Aeropuerto de Destino","Dia","Hora","No.Vuelo","Avion"});
+            
+            for(int i=0; i < vuelos.size(); i++){
+                if(vuelos.get(i).getAerolinea() == aerolinea){
+                    model.addRow(new Object[]{vuelos.get(i).getPais(), vuelos.get(i).getOrigen(),vuelos.get(i).getDestino(),
+                        vuelos.get(i).getDia(), vuelos.get(i).getHora()});
+                }
+            }
+            this.ventana2.tbVuelos.setModel(model);
+            TableColumn tc = this.ventana2.tbVuelos.getColumnModel().getColumn(6);
+            TableCellEditor tce = new DefaultCellEditor(this.ventana2.cbAviones);
+            tc.setCellEditor(tce);
         }
         
         if(e.getSource()== this.ventana1.btnSiguiente){            
@@ -227,14 +262,3 @@ public class Controlador implements ActionListener{
         }
     }
 }
-/*
-    ArrayList<String> prueba = new ArrayList();
-    prueba.add("a");
-    prueba.add("b");
-    prueba.add("c");
-        
-    for(int i=0; i < prueba.size(); i++){
-        this.ventana2.cbAviones.addItem(prueba.get(i));
-    }
-    
-*/

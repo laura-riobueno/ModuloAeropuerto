@@ -6,6 +6,7 @@ package interfaz;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
@@ -23,9 +24,6 @@ public class Ventana2 extends javax.swing.JFrame {
     public Ventana2() {
         initComponents();
         cbAviones = new JComboBox();
-        TableColumn tc = tbVuelos.getColumnModel().getColumn(6);
-        TableCellEditor tce = new DefaultCellEditor(cbAviones);
-        tc.setCellEditor(tce);
     }
     
     /**
@@ -73,7 +71,6 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(774, 454));
 
         cbAerolinea.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        cbAerolinea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lbAerolinea.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         lbAerolinea.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -114,6 +111,8 @@ public class Ventana2 extends javax.swing.JFrame {
             }
         });
         tbVuelos.setColumnSelectionAllowed(true);
+        tbVuelos.setRowHeight(25);
+        tbVuelos.setShowGrid(true);
         jScrollPane2.setViewportView(tbVuelos);
         tbVuelos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -227,6 +226,6 @@ public class Ventana2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAerolinea;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JTable tbVuelos;
+    public javax.swing.JTable tbVuelos;
     // End of variables declaration//GEN-END:variables
 }
