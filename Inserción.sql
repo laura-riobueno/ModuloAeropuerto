@@ -36,32 +36,32 @@ insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('25','3','12',
 insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('26','3','13','San Andrés');
 insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('27','3','14','Santa Marta');
 
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('AXM-SKAR','5','15','El Edén');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('BAQ-SKBQ','5','16','Ernesto Cortissoz');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('BOG-SKBO','5','17','El Dorado');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('BGA-SKBG','5','18','Palonegro');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('CLO-SKCL','5','19','Alfonso Bonilla Aragón');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('CTG-SKCG','5','20','Rafael Nuñez');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('CUC-SKCC','5','21','Camilo Daza');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('LET-SKLT','5','22','Alfredo Vásquez Cobo');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('MDE-SKRG','5','23','José María Córdova');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('PEI-SKPE','5','24','Matecaña');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('RCH-SKRH','5','25','Almirante Padilla');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('ADZ-SKSP','5','26','Gistavo Rojas Pinilla');
-insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('SMR-SKSM','5','27','Simón Bolívar');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('28','5','15','El Edén');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('29','5','16','Ernesto Cortissoz');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('30','5','17','El Dorado');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('31','5','18','Palonegro');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('32','5','19','Alfonso Bonilla Aragón');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('33','5','20','Rafael Nuñez');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('34','5','21','Camilo Daza');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('35','5','22','Alfredo Vásquez Cobo');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('36','5','23','José María Córdova');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('37','5','24','Matecaña');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('38','5','25','Almirante Padilla');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('39','5','26','Gistavo Rojas Pinilla');
+insert into lugar (idlugar,idtipolu,lug_idlugar,nomlugar) values ('40','5','27','Simón Bolívar');
 
-insert into dia (iddia,anomdia) values ('1','Lunes');
-insert into dia (iddia,anomdia) values ('2','Martes');
-insert into dia (iddia,anomdia) values ('3','Miercoles');
-insert into dia (iddia,anomdia) values ('4','Jueves');
-insert into dia (iddia,anomdia) values ('5','Viernes');
-insert into dia (iddia,anomdia) values ('6','Sábado');
-insert into dia (iddia,anomdia) values ('7','Domingo');
+insert into dias (iddia,nomdia) values ('1','Lunes');
+insert into dias (iddia,nomdia) values ('2','Martes');
+insert into dias (iddia,nomdia) values ('3','Miercoles');
+insert into dias (iddia,nomdia) values ('4','Jueves');
+insert into dias (iddia,nomdia) values ('5','Viernes');
+insert into dias (iddia,nomdia) values ('6','Sábado');
+insert into dias (iddia,nomdia) values ('7','Domingo');
 
-insert into lineaaerea (codlinea,nomlinea) values ('101','Avianca');
-insert into lineaaerea (codlinea,nomlinea) values ('102','Latam');
-insert into lineaaerea (codlinea,nomlinea) values ('103','Viva Air Colombia');
-insert into lineaaerea (codlinea,nomlinea) values ('104','Wingo');
+insert into lineaaerea (codlinea,nombrelinea) values ('101','Avianca');
+insert into lineaaerea (codlinea,nombrelinea) values ('102','Latam');
+insert into lineaaerea (codlinea,nombrelinea) values ('103','Viva Air Colombia');
+insert into lineaaerea (codlinea,nombrelinea) values ('104','Wingo');
 
 insert into modeloavion (idmodelo, capacidad) values ('Boeing757', '289');
 insert into modeloavion (idmodelo, capacidad) values ('AirbusA3030', '252');
