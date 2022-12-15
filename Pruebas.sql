@@ -27,27 +27,32 @@ insert into vuelo (idvuelo,codlinea,idprograma,placaavion,fecha,plazasvacia) val
 	where MA.idmodelo = AV.idmodelo
 	and AV.placaavion ='101101'));
 	
-
-select PV.codlinea, PV.idprograma, PV.lug_idlugar,PV.lug_idlugar2, V.fecha, Di.iddia, Ds.idhora
-from programavuelo PV, vuelo V, dia DI, destino DS
-where PV.idprograma = V.idprograma and PV.idprograma = DI.idprograma and PV.idprograma = DS.idprograma;
 						
 select idlugar ||' '|| nomlugar as "paises"
 from lugar
 where idtipolu = '5' or idtipolu = '6';
+
+select PV.codlinea, PV.idprograma, PV.lug_idlugar,PV.lug_idlugar2, V.fecha, Di.iddia, Ds.idhora
+from programavuelo PV, vuelo V, dia DI, destino DS
+where PV.idprograma = V.idprograma and PV.idprograma = DI.idprograma and PV.idprograma = DS.idprograma;
+
+select PV.codlinea, PV.idprograma, L1.nomlugar, L2.nomlugar, V.fecha, Di.iddia, Ds.idhora
+from programavuelo PV, vuelo V, dia DI, destino DS, lugar L1, lugar L2
+where PV.idprograma = V.idprograma and PV.idprograma = DI.idprograma and PV.idprograma = DS.idprograma
+	and PV.lug_idlugar = L1.idlugar and PV.lug_idlugar2 = L2.idlugar;
 
 select * from programavuelo;
 select * from vuelo;
 select * from destino;
 select * from hora;
 
-delete from dia where idprograma = '478';
+delete from dia where idprograma = '555';
 
-delete from destino  where idprograma = '478';
+delete from destino  where idprograma = '555';
 
-delete from vuelo where idprograma = '478';
+delete from vuelo where idprograma = '555';
 
-delete from programavuelo where idprograma = '478';
+delete from programavuelo where idprograma = '555';
 
-delete from hora where idhora = '330';
+delete from hora where idhora = '1330';
 
