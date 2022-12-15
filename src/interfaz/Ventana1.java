@@ -109,6 +109,11 @@ public class Ventana1 extends javax.swing.JFrame {
         btnSiguiente.setFont(new java.awt.Font("Sitka Text", 0, 18)); // NOI18N
         btnSiguiente.setLabel("Siguiente");
         btnSiguiente.setName(""); // NOI18N
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -204,6 +209,10 @@ public class Ventana1 extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public java.awt.Button btnAgregar;

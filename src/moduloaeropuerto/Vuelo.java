@@ -11,14 +11,23 @@ public class Vuelo {
     private String fecha;
     private String hora;
     private String avion;
+    private String fechaCreacion;
     
     public Vuelo(){
          
     }
     
     
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
     // getter y setters
     
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     public String getAerolinea() {
         return aerolinea;
     }

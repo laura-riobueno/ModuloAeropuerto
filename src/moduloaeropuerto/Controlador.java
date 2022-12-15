@@ -10,14 +10,19 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class Controlador implements ActionListener{
 
@@ -28,6 +33,7 @@ public class Controlador implements ActionListener{
     private String aerolinea;
     private ArrayList<Vuelo> vuelos = new ArrayList();
     private ArrayList<String> listaTemporal = new ArrayList();
+    private ArrayList<Vuelo> listaTemporal2 = new ArrayList();
     
     public Controlador(ArrayList<Vuelo> vuelos, Ventana1 vnt1, Ventana2 vnt2){
         
@@ -37,7 +43,6 @@ public class Controlador implements ActionListener{
         this.ventana1 = vnt1;
         this.ventana1.btnAgregar.addActionListener(this);
         this.ventana1.btnSiguiente.addActionListener(this);
-        this.ventana1.btnSiguiente.setEnabled(false);
         this.ventana1.cbPais.addActionListener(this);
         this.ventana1.cbOrigen.addActionListener(this);
         this.ventana1.cbDestino.addActionListener(this);
@@ -52,9 +57,10 @@ public class Controlador implements ActionListener{
         }
         
         this.ventana1.cbMinuto.addItem(null);
-        for(int i=0; i<4; i++){
-            this.ventana1.cbMinuto.addItem("" + i*15 + "");
-        }
+        this.ventana1.cbMinuto.addItem("00");
+        this.ventana1.cbMinuto.addItem("15");
+        this.ventana1.cbMinuto.addItem("30");
+        this.ventana1.cbMinuto.addItem("45");
         
         listaTemporal = vueloDAO.listaPaises();
         this.ventana1.cbPais.addItem(null);
@@ -84,6 +90,7 @@ public class Controlador implements ActionListener{
         this.ventana2.cbAviones.addActionListener(this);
         this.ventana2.btnTerminar.addActionListener(this);
         this.ventana2.btnSalir.addActionListener(this);
+        this.ventana2.btnReporte.addActionListener(this);
         
         
         this.ventana2.cbAerolinea.addItem(null);
@@ -92,10 +99,12 @@ public class Controlador implements ActionListener{
         }
     }
     
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== this.ventana1.btnAgregar){
             
+            // tener una date de la fecha actual
             Date in = new Date();
             LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
             Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
@@ -111,9 +120,10 @@ public class Controlador implements ActionListener{
                 vuelo.setDestino((String) this.ventana1.cbDestino.getSelectedItem());
                 vuelo.setAerolinea((String) this.ventana1.cbAerolinea.getSelectedItem());
                 vuelo.setHora((String) this.ventana1.cbHora.getSelectedItem() + ":" + (String) this.ventana1.cbMinuto.getSelectedItem());
+                
                 Date date = new Date();
                 date = this.ventana1.dtFecha.getDate();
-                DateFormat df1 = new SimpleDateFormat("dd/mm/yyyy");
+                DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
                 vuelo.setFecha(df1.format(date));
 
                 DateFormat df2 = new SimpleDateFormat("EEEE MMMM dd yyyy", Locale.ENGLISH);
@@ -122,29 +132,32 @@ public class Controlador implements ActionListener{
                 dia = fecha[0];
                 switch(dia){
                     case "Monday":
-                        dia = "Luens";
+                        dia = "1";
                         break;
                     case "Tuesday":
-                        dia = "Martes";
+                        dia = "2";
                         break;
                     case "Wednesday":
-                        dia = "Miércoles";
+                        dia = "3";
                         break;
                     case "Thursday":
-                        dia = "Jueves";
+                        dia = "4";
                         break;
                     case "Friday":
-                        dia = "Viernes";
+                        dia = "5";
                         break;
                     case "Saturday":
-                        dia = "Sábado";
+                        dia = "6";
                         break;
                     case "Sunday":
-                        dia = "Domingo";
+                        dia = "7";
                         break;    
                 }
 
                 vuelo.setDia(dia);
+                DateFormat df3 = new SimpleDateFormat("dd/MM/yyyy");
+                String fc = df3.format(out);
+                vuelo.setFechaCreacion(fc);
                 
                 vuelos.add(vuelo);
                 
@@ -206,14 +219,38 @@ public class Controlador implements ActionListener{
             for(int i=0; i < listaTemporal.size(); i++){
                 this.ventana2.cbAviones.addItem(listaTemporal.get(i));
             }
-    
+            
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnIdentifiers(new Object[]{"Pais", "Aeropuerto de Origen", "Aeropuerto de Destino","Dia","Hora","No.Vuelo","Avion"});
             
             for(int i=0; i < vuelos.size(); i++){
                 if(vuelos.get(i).getAerolinea() == aerolinea){
+                    String dia = vuelos.get(i).getDia();
+                    switch(dia){
+                    case "1":
+                        dia = "Lunes";
+                        break;
+                    case "2":
+                        dia = "Martes";
+                        break;
+                    case "3":
+                        dia = "Miércoles";
+                        break;
+                    case "4":
+                        dia = "Jueves";
+                        break;
+                    case "5":
+                        dia = "Viernes";
+                        break;
+                    case "6":
+                        dia = "Sábado";
+                        break;
+                    case "7":
+                        dia = "Domingo";
+                        break;
+                    }
                     model.addRow(new Object[]{vuelos.get(i).getPais(), vuelos.get(i).getOrigen(),vuelos.get(i).getDestino(),
-                        vuelos.get(i).getDia(), vuelos.get(i).getHora()});
+                        dia, vuelos.get(i).getHora()});
                 }
             }
             this.ventana2.tbVuelos.setModel(model);
@@ -227,19 +264,68 @@ public class Controlador implements ActionListener{
             this.ventana1.setVisible(false);
         }
         if(e.getSource()== this.ventana2.btnTerminar){
+
             for (int i = 0; i < this.ventana2.tbVuelos.getRowCount(); i++){
                 if(vuelos.get(i).getAerolinea() == aerolinea){
                     vuelos.get(i).setNumeroV((String) this.ventana2.tbVuelos.getValueAt(i, 5));
                     vuelos.get(i).setAvion((String) this.ventana2.tbVuelos.getValueAt(i, 6));
-                    System.out.println(vuelos.get(i).getNumeroV()+ " " + vuelos.get(i).getOrigen());
+                    vueloDAO.ingresarVuelo(vuelo);
                 } 
             }
-
         }
+        if(e.getSource()== this.ventana2.btnReporte){
+            Document documento = new Document();
+            try{
+                String ruta = System.getProperty("user/lain-");
+                PdfWriter.getInstance(documento, new FileOutputStream("Reporte_Vuelos.pdf"));
+                documento.open();
+                listaTemporal2 = vueloDAO.listaVuelos();
+                for(int i=0;i < listaTemporal2.size();i++){
+                    String codLinea = listaTemporal2.get(i).getAerolinea();
+                    switch(codLinea){
+                        case "101":
+                            codLinea = "Avianca";
+                            break;
+                        case "102":
+                            codLinea = "Latam";
+                            break;
+                        case "103":
+                            codLinea = "Viva Air Colombia";
+                            break;
+                        case "104":
+                            codLinea = "Wingo";
+                            break;
+                    }
+                    int rnd = (int) (Math.random()*4)+1;
+                    String horallegada;
+                    if(listaTemporal2.get(i).getHora().length() == 4){
+                        int aux = Integer.parseInt(listaTemporal2.get(i).getHora().substring(0, 1))+rnd;
+                        horallegada = aux + ":" + listaTemporal2.get(i).getHora().substring(2, 4);
+                    }else{
+                        int aux = Integer.parseInt(listaTemporal2.get(i).getHora().substring(0, 2))+rnd;
+                        horallegada = aux + ":" + listaTemporal2.get(i).getHora().substring(3, 5);    
+                    }
+                    Paragraph parrafo = new Paragraph("El programa de Vuelo "+ listaTemporal2.get(i).getNumeroV() +" de "+ codLinea +" "
+                                                    + "con vuelo en la fecha "+ listaTemporal2.get(i).getFecha()+" despega del Aeropuerto "+ listaTemporal2.get(i).getOrigen()
+                                                    + " a las "+ listaTemporal2.get(i).getHora() +" y aterriza en el aeropuerto "+ listaTemporal2.get(i).getDestino()
+                                                    + " a las "+ horallegada +".\n\n");
+                    Paragraph parrafoP = new Paragraph("Hola");
+                    documento.add(parrafo);
+                }
+                documento.close();
+                JOptionPane.showMessageDialog(null, "Reporte creado");
+            }catch (Exception ex){
+                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "No se pudo crear el reporte");
+            }
+        }
+        
         if(e.getSource()== this.ventana2.btnSalir){
             this.ventana2.setVisible(false);
             this.ventana2.dispose();
             System.exit(0);
         }
+        
+        
     }
 }
