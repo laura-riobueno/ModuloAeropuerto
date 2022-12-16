@@ -270,6 +270,8 @@ public class Controlador implements ActionListener{
                     vuelos.get(i).setNumeroV((String) this.ventana2.tbVuelos.getValueAt(i, 5));
                     vuelos.get(i).setAvion((String) this.ventana2.tbVuelos.getValueAt(i, 6));
                     vueloDAO.ingresarVuelo(vuelo);
+                    System.out.println(this.ventana2.tbVuelos.getValueAt(i, 5));
+                    System.out.println(i);
                 } 
             }
         }

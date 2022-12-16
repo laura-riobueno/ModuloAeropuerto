@@ -171,7 +171,7 @@ IDACCION
 /*==============================================================*/
 create table AVION (
    PLACAAVION           VARCHAR(6)           not null,
-   IDMODELO             VARCHAR(3)           not null,
+   IDMODELO             VARCHAR(15)           not null,
    CODLINEA				VARCHAR(3)			 not null,
    constraint PK_AVION primary key (PLACAAVION)
 );
@@ -289,7 +289,7 @@ create table ESCALA (
    IDPROGRAMA           NUMERIC(5,0)         not null,
    CONSCEC              NUMERIC(2,0)         not null,
    IDTIPOESCALA         VARCHAR(1)           not null,
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    constraint PK_ESCALA primary key (CODLINEA, IDPROGRAMA, CONSCEC)
 );
 
@@ -333,7 +333,7 @@ create table EVENTOPISTA (
    IDTIPOEVENTO         VARCHAR(1)           not null,
    CODLINEA             VARCHAR(3)           null,
    IDPROGRAMA           NUMERIC(5,0)         null,
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    NUMPISTA             NUMERIC(2,0)         not null,
    FECHAEVENTO          DATE                 null,
    HORAEVENTO           TIME                 null,
@@ -412,7 +412,7 @@ CODLINEA
 /* Table: LUGAR                                                 */
 /*==============================================================*/
 create table LUGAR (
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    LUG_IDLUGAR          VARCHAR(5)           null,
    IDTIPOLU             VARCHAR(3)           not null,
    NOMLUGAR             VARCHAR(30)          not null,
@@ -444,7 +444,7 @@ LUG_IDLUGAR
 /* Table: MODELOAVION                                           */
 /*==============================================================*/
 create table MODELOAVION (
-   IDMODELO             VARCHAR(3)           not null,
+   IDMODELO             VARCHAR(15)           not null,
    CAPACIDAD            NUMERIC(5,0)         not null,
    constraint PK_MODELOAVION primary key (IDMODELO)
 );
@@ -514,7 +514,7 @@ IDACCION
 /*==============================================================*/
 create table PASAJERO (
    NDOCUMENTO           VARCHAR(15)          not null,
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    NOMBRE               VARCHAR(20)          not null,
    APELLIDO             VARCHAR(20)          not null,
    FECHANACIMIENTO      DATE                 not null,
@@ -539,7 +539,7 @@ IDLUGAR
 /* Table: PISTA                                                 */
 /*==============================================================*/
 create table PISTA (
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    NUMPISTA             NUMERIC(2,0)         not null,
    constraint PK_PISTA primary key (IDLUGAR, NUMPISTA)
 );
@@ -565,14 +565,10 @@ IDLUGAR
 create table PROGRAMAVUELO (
    CODLINEA             VARCHAR(3)           not null,
    IDPROGRAMA           NUMERIC(5,0)         not null,
-   IDLUGAR              VARCHAR(5)           not null,
+   IDLUGAR              VARCHAR(10)           not null,
    LUG_IDLUGAR          VARCHAR(5)           not null,
    LUG_IDLUGAR2         VARCHAR(5)           not null,
-   LUG_IDLUGAR3         VARCHAR(5)           not null,
-   LUG_IDLUGAR4         VARCHAR(5)           not null,
-   LUG_IDLUGAR5         VARCHAR(5)           not null,
-   LUG_IDLUGAR6         VARCHAR(5)           not null,
-   LUG_IDLUGAR7         VARCHAR(5)           not null,
+
    FECHACREA            DATE                 not null,
    constraint PK_PROGRAMAVUELO primary key (CODLINEA, IDPROGRAMA)
 );
@@ -583,20 +579,6 @@ create table PROGRAMAVUELO (
 create unique index PROGRAMAVUELO_PK on PROGRAMAVUELO (
 CODLINEA,
 IDPROGRAMA
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_8_FK                                     */
-/*==============================================================*/
-create  index RELATIONSHIP_8_FK on PROGRAMAVUELO (
-LUG_IDLUGAR7
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_9_FK                                     */
-/*==============================================================*/
-create  index RELATIONSHIP_9_FK on PROGRAMAVUELO (
-LUG_IDLUGAR5
 );
 
 /*==============================================================*/
@@ -620,19 +602,7 @@ create  index RELATIONSHIP_27_FK on PROGRAMAVUELO (
 LUG_IDLUGAR
 );
 
-/*==============================================================*/
-/* Index: RELATIONSHIP_28_FK                                    */
-/*==============================================================*/
-create  index RELATIONSHIP_28_FK on PROGRAMAVUELO (
-LUG_IDLUGAR4
-);
 
-/*==============================================================*/
-/* Index: RELATIONSHIP_29_FK                                    */
-/*==============================================================*/
-create  index RELATIONSHIP_29_FK on PROGRAMAVUELO (
-LUG_IDLUGAR3
-);
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_30_FK                                    */
@@ -641,12 +611,6 @@ create  index RELATIONSHIP_30_FK on PROGRAMAVUELO (
 LUG_IDLUGAR2
 );
 
-/*==============================================================*/
-/* Index: RELATIONSHIP_31_FK                                    */
-/*==============================================================*/
-create  index RELATIONSHIP_31_FK on PROGRAMAVUELO (
-LUG_IDLUGAR6
-);
 
 /*==============================================================*/
 /* Table: SILLA                                                 */
@@ -767,7 +731,7 @@ alter table AVION
    add constraint FK_AVION_RELATIONS_MODELOAV foreign key (IDMODELO)
       references MODELOAVION (IDMODELO)
       on delete restrict on update restrict;
-	  
+
 alter table AVION
    add constraint FK_AVION_RELATIONS_LINEAAEREA foreign key (CODLINEA)
       references LINEAAEREA (CODLINEA)
@@ -884,32 +848,7 @@ alter table PROGRAMAVUELO
       on delete restrict on update restrict;
 
 alter table PROGRAMAVUELO
-   add constraint FK_PROGRAMA_RELATIONS_LUGAR6 foreign key (LUG_IDLUGAR4)
-      references LUGAR (IDLUGAR)
-      on delete restrict on update restrict;
-
-alter table PROGRAMAVUELO
-   add constraint FK_PROGRAMA_RELATIONS_LUGAR7 foreign key (LUG_IDLUGAR3)
-      references LUGAR (IDLUGAR)
-      on delete restrict on update restrict;
-
-alter table PROGRAMAVUELO
    add constraint FK_PROGRAMA_RELATIONS_LUGAR8 foreign key (LUG_IDLUGAR2)
-      references LUGAR (IDLUGAR)
-      on delete restrict on update restrict;
-
-alter table PROGRAMAVUELO
-   add constraint FK_PROGRAMA_RELATIONS_LUGAR foreign key (LUG_IDLUGAR6)
-      references LUGAR (IDLUGAR)
-      on delete restrict on update restrict;
-
-alter table PROGRAMAVUELO
-   add constraint FK_PROGRAMA_RELATIONS_LUGAR2 foreign key (LUG_IDLUGAR7)
-      references LUGAR (IDLUGAR)
-      on delete restrict on update restrict;
-
-alter table PROGRAMAVUELO
-   add constraint FK_PROGRAMA_RELATIONS_LUGAR3 foreign key (LUG_IDLUGAR5)
       references LUGAR (IDLUGAR)
       on delete restrict on update restrict;
 
